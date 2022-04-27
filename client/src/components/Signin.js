@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Button, Card, Form, Toast, ToastContainer,Spinner } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Button, Card, Form, Spinner } from "react-bootstrap";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Swal from "sweetalert2"
-
-
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -15,11 +13,16 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const submitHandler = async () => {
-    setLoading(true);
+    
     if (!email || !password) {
-      setShowA(true);
+      Swal.fire({
+        icon: "warning",
+        title: "Oops...",
+        text: "Please fill all the entry !",
+      });
       return;
     }
+    setLoading(true);
     try {
       const config = {
         headers: {
@@ -33,89 +36,91 @@ const SignIn = () => {
       );
       if (data.message === "notfound") {
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'User not exist!',
-        })
-        // alert("user not exist");
+          icon: "error",
+          title: "Oops...",
+          text: "User not exist!",
+        });
+        
         return;
       }
       window.location.reload();
       Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Login sucessfully',
+        position: "center",
+        icon: "success",
+        title: "Login sucessfully",
         showConfirmButton: false,
-        timer: 2500
-      })
+        timer: 2500,
+      });
       localStorage.setItem("userinfo", JSON.stringify(data));
       setLoading(false);
       navigate("/chat");
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      })
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
     }
   };
   return (
     <>
-      <ToastContainer position="top-end"  className="p-3">
-        <Toast show={showA} onClose={toggleShowA}>
-          <Toast.Header className="bg-danger">
-            {/* <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" /> */}
-            <strong className="me-auto">Chatify</strong>
-            <small className="text-muted">just now</small>
-          </Toast.Header>
-          <Toast.Body>Please filled all entries</Toast.Body>
-        </Toast>
-      </ToastContainer>
-      {loading?<Spinner animation="border" variant="info" />:
-        <Card style={{ padding: "1rem" }}>
-        <Form>
-          <Form.Group className="mb-3" controlId="formGroupEmailLogin">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formGroupPasswordLogin">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-            />
-          </Form.Group>
-          <h6 className="text-danger">
-            {" "}
-            Don't have an account ? click here..{" "}
-          </h6>
-          <Button
-            className="col-12 mt-4 mb-2"
-            variant="outline-primary"
-            onClick={() => submitHandler()}
-          >
-            sign in
-          </Button>{" "}
-          <Button
-            className="col-12 mb-2"
-            variant="outline-danger"
-            onClick={() => {
-              setEmail("guest@example.com");
-              setPassword("123456");
-            }}
-          >
-            Get Guest User Credentials
-          </Button>{" "}
-        </Form>
-      </Card>
-      }
+      {loading ? (
+        <Spinner animation="border" variant="info" />
+      ) : (
+        <Card
+          style={{
+            padding: "2rem 1rem",
+            display: "flex",
+            width: "25rem",
+            backgroundColor: "#00000065",
+            borderRadius:"15px"
+          }}
+        >
+          <h3 className="py-3 text-white">Chatify-Chatter</h3>
+          <Form>
+            <Card.Title className="text-white">SignIn</Card.Title>
+            <Form.Group className="mb-3" controlId="formGroupEmailLogin">
+              <Form.Control
+                className="inputstyle"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter email"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formGroupPasswordLogin">
+              <Form.Control
+               className="inputstyle"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+            </Form.Group>
+            <NavLink className="text-danger" to="/signup">
+              {" "}
+              Don't have an account ? click here..{" "}
+            </NavLink>
+            <Button
+              className="col-12 mt-4 mb-2"
+              variant="outline-info"
+              onClick={() => submitHandler()}
+            >
+              sign in
+            </Button>{" "}
+            <Button
+              className="col-12 mb-2"
+              variant="outline-light"
+              onClick={() => {
+                setEmail("guest@example.com");
+                setPassword("123456");
+              }}
+            >
+              Get Guest User Credentials
+            </Button>{" "}
+          </Form>
+        </Card>
+      )}
     </>
   );
 };

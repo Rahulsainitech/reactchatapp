@@ -13,9 +13,11 @@ const Home = () => {
   
   return (
     <div className="home">
+    <Signin/>
+    {/* <Signup/> */}
 
-      <Card style={{height:"80vh",width:"36rem",marginTop:"5rem"}} className="mx-1">
-      <Card.Title className="text-center" style={{background:"pink",margin:"1rem",padding:".5rem"}}>Talk-With-Rahul</Card.Title>
+      {/* <Card style={{height:"auto",width:"auto",marginTop:"5rem"}} className="mx-1">
+      <Card.Title className="text-center" style={{background:"pink",margin:"1rem",padding:".5rem"}}>Chattify-chatter</Card.Title>
         <Tabs
           defaultActiveKey="home"
           transition={false}
@@ -30,7 +32,7 @@ const Home = () => {
           </Tab>
          
         </Tabs>
-      </Card>
+      </Card> */}
     </div>
   );
 };

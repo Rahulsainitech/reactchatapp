@@ -1,13 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Raleway:ital,wght@1,200&display=swap');
 body{
     margin: 0;
     padding:0
 }
+h3{
+    font-family: 'Cookie', cursive;
+    text-align: center;
+    background-color: #0000001e;
+}
+.inputstyle{
+    background-color: #7c7c7c2b !important;
+    color: white !important;
+    &::placeholder{
+        color: white !important;
+    }
+}
 
 .home{
     display: flex;
-    min-height: 100vh;
-    background-image: linear-gradient(to left ,rgb(19, 125, 247),green);
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('https://s3.envato.com/files/0dba8194-d80c-4e9a-ab08-b2b3c7057308/inline_image_preview.jpg');
     background-size: cover;
     background-position: center;
     justify-content: center;

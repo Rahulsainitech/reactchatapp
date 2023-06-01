@@ -135,7 +135,7 @@ const Sidedrawer = () => {
               right: "60px",
               zIndex: 3,
               backgroundColor: "lightblue",
-              padding: "7px",
+              padding: " ",
               borderRadius: "24px",
             }}
           >

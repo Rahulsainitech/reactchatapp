@@ -6,10 +6,10 @@ const User = require("../models/userModal");
 const sendMessage = expressAsyncHandler(async(req,res)=>{
 const {content,chatId} = req.body
 if (!content || !chatId){
-    console.log("Invalid data passed into request");
+    // console.log("Invalid data passed into request");
     return res.sendStatus(400);
 }
-console.log(req.body)
+// console.log(req.body)
 var newMessage = {
     sender:req.user._id,
      content:content,
@@ -24,14 +24,14 @@ message = await User.populate(message,{
     path:"chat.users",
     select:"name pic email"
 })
-console.log('message is ',message)
+// console.log('message is ',message)
     await Chat.findByIdAndUpdate(req.body.chatId,{
         latestMessage:message
     })
-    console.log(message )
+    // console.log(message )
     res.json(message)
 } catch (error) {
-    console.log(error)
+    // console.log(error)
     res.status(400);
     throw new Error(error.message);
 }

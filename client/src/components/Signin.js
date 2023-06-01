@@ -38,12 +38,13 @@ const SignIn = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "User not exist!",
+          text: "User not exist! or Invalid credentials",
+          timer: 6500,
         });
-        
+        window.location.reload()
         return;
       }
-      window.location.reload();
+      // window.location.reload();
       Swal.fire({
         position: "center",
         icon: "success",

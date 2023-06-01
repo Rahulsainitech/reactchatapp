@@ -4,10 +4,10 @@ const User = require("../models/userModal");
 
 const acessChat = asyncHandler(async (req, res) => {
   const { userId } = req.body;
-  console.log("access  chat route",userId)
+  // console.log("access  chat route",userId)
 
   if (!userId) {
-    console.log("userId param not sent with request");
+    // console.log("userId param not sent with request");
     return res.sendStatus(400);
   }
   var isChat = await Chat.find({
@@ -59,7 +59,7 @@ const fetchChats = asyncHandler(async (req, res) => {
           path: "latestMessage.sender",
           select: "name pic email",
         });
-        console.log("chat result",results)
+        // console.log("chat result",results)
         res.status(200).send(results);
       });
   } catch (error) {
@@ -68,8 +68,8 @@ const fetchChats = asyncHandler(async (req, res) => {
 });
 
 const createGroupChat = asyncHandler(async (req, res) => {
-  console.log(req.body)
-  console.log(req.user._id)
+  // console.log(req.body)
+  // console.log(req.user._id)
   if (!req.body.users || !req.body.name) {
     return res.status(400).send({ message: "Please Fill all the fields" });
   }

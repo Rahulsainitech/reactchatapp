@@ -17,7 +17,7 @@ const ChatProvider = ({ children }) => {
       history("/chat");
     }
     //  else {
-      // history("/chat");
+    //   history("/");
     // }
   }, [history]);
   return (
